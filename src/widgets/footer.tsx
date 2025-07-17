@@ -5,7 +5,7 @@ import { Facebook, Linkedin, Instagram } from "lucide-react"
 export function Footer() {
   return (
     <footer className="bg-white border-t sec-padding">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+      <div className="container mx-auto px-6 md:px-10">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-20">
           {/* Left Section - Logo */}
           <div className="flex flex-col gap-8">

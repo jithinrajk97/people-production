@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { manrope, figtree } from "./fonts"
 import { cn } from "@/lib/utils"
+import { CustomCursor } from "@/src/components/custom-cursor"
 
 export const metadata: Metadata = {
   title: "Happiest People Productions",
@@ -17,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(manrope.variable, figtree.variable)}>
-      <body>{children}</body>
+      <body>
+      <CustomCursor />
+
+        {children}</body>
     </html>
   )
 }

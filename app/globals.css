@@ -97,6 +97,14 @@
 
 
   .sec-padding {
-    @apply py-20 lg:py-[140px];
+    --pt: 50px;
+    --pb: 50px;
+    padding: var(--pt) 0 var(--pb) 0;
+  }
+  @media (min-width: 1024px) { /* Tailwind's lg breakpoint is 1024px */
+    .sec-padding {
+      --pt: 85px;
+      --pb: 85px;
+    }
   }
 }
