@@ -94,4 +94,9 @@
   .text-balance {
     text-wrap: balance;
   }
+
+
+  .sec-padding {
+    @apply py-20 lg:py-[140px];
+  }
 }

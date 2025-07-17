@@ -47,7 +47,7 @@ export function Header() {
 
           <nav className="hidden lg:flex items-center space-x-16">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="text-2xl font-medium text-gray-300 hover:text-primary-brand">
+              <Link key={link.name} href={link.href} className="text-lg font-medium text-gray-300 hover:text-primary-brand">
                 {link.name}
               </Link>
             ))}

@@ -26,8 +26,8 @@ export function HeroSection() {
             Crafting a Impactful{" "}
             <span className="font-semibold italic">ads</span>
           </h1>
-          <div className=" mt-6 lg:mt-20">
-            <AnimatedLink href="/contact">Contact Us</AnimatedLink>
+          <div className=" mt-6 lg:mt-14 px-3">
+            <AnimatedLink href="/contact" className="text-[22px]">Contact Us</AnimatedLink>
           </div>
         </div>
       </div>
