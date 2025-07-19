@@ -13,6 +13,7 @@ export function HomeAbout() {
 
     const imageRef = useRef<HTMLDivElement>(null)
     const sectionRef = useRef<HTMLElement>(null)
+    const gradientTextRef = useRef<HTMLSpanElement>(null)
   
     useEffect(() => {
       if (typeof window === "undefined") return
@@ -29,6 +30,28 @@ export function HomeAbout() {
             scrub: 1,
           },
         })
+
+        // Animate background-size for gradient reveal
+        if (gradientTextRef.current) {
+          gsap.fromTo(
+            gradientTextRef.current,
+            { backgroundSize: "0% 100%" ,
+              color:"#fff"
+
+            },
+            {
+              backgroundSize: "104% 105%",
+              color:"transparent",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "50% 80%",
+                end: "50% 60%",
+                scrub: 1,
+                markers:true,
+              },
+            }
+          )
+        }
       })
   
       return () => ctx.revert()
@@ -40,11 +63,19 @@ export function HomeAbout() {
           {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <p className="text-gray-400 uppercase text-sm font-medium tracking-wider">About Us</p>
+              <div className=" uppercase text-sm font-medium tracking-wider bg-white/20 tex-white inline-block px-4 py-2 rounded-full ">
+              <p className="text-white">About Us</p>
+              </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-8xl font-light leading-tight">
                 We serve a<br />
-                wide <span className="italic font-semibold">tailored</span>
+                wide <span
+                  ref={gradientTextRef}
+                  className="italic font-semibold pr-6  bg-gradient-to-r from-[#E9E9EE] to-[#FBCF1D] bg-clip-text text-transparent  bg-no-repeat"
+                  style={{ backgroundSize: "0% 100%" }}
+                >
+                  tailored
+                </span>
               </h2>
 
               <p className="text-gray-300 text-lg leading-relaxed max-w-md">
@@ -63,7 +94,6 @@ export function HomeAbout() {
             </div>
           </div>
 
-          {/* Right 3D Icon */}
            {/* Right 3D Image */}
            <div className="flex justify-start ">
             <div ref={imageRef} className="relative">
@@ -76,6 +106,36 @@ export function HomeAbout() {
                 priority
               />
             </div>
+          </div>
+
+
+        </div>
+
+
+        <div className="counter w-full flex flex-col md:flex-row justify-between items-center bg-black rounded-xl py-8 mt-16 shadow-lg">
+          {/* Counter Item 1 */}
+          <div className="flex-1 flex flex-col   px-4 pl-0">
+            <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white">300<span className="text-primary-brand">+</span></span>
+            <span className="mt-2 text-gray-400 text-base md:text-lg">Customer globally</span>
+          </div>
+          {/* Divider */}
+          <div className="hidden md:block h-16 border-l border-gray-700 mx-2"></div>
+          {/* Counter Item 2 */}
+          <div className="flex-1 flex flex-col   px-4">
+            <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white">200<span className="text-primary-brand">+</span></span>
+            <span className="mt-2 text-gray-400 text-base md:text-lg">Experts of team</span>
+          </div>
+          <div className="hidden md:block h-16 border-l border-gray-700 mx-2"></div>
+          {/* Counter Item 3 */}
+          <div className="flex-1 flex flex-col   px-4">
+            <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white">36<span className="text-primary-brand">+</span></span>
+            <span className="mt-2 text-gray-400 text-base md:text-lg">Countries served</span>
+          </div>
+          <div className="hidden md:block h-16 border-l border-gray-700 mx-2"></div>
+          {/* Counter Item 4 */}
+          <div className="flex-1 flex flex-col   px-4">
+            <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white">12<span className="text-primary-brand">+</span></span>
+            <span className="mt-2 text-gray-400 text-base md:text-lg">Year of experience</span>
           </div>
         </div>
       </div>
