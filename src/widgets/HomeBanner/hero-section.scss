@@ -1,0 +1,129 @@
+.bg-layer{
+     position: absolute;
+     left: -10%;
+     top: 50%;
+     height: 1px;
+     width: 120%;
+     background: #3d3d3d;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: calc(20vw + 28px / .1);
+     pointer-events: none;
+     z-index: 2;
+
+     &::before {
+       content: "";
+       position: absolute;
+       left: 0;
+       height: 150vh;
+       width: 100%;
+       z-index: -1;
+       bottom: 0;
+       background: #fff;
+     }
+
+     &::after {
+       content: "";
+       position: absolute;
+       left: 0;
+       height: 150vh;
+       width: 100%;
+       z-index: -1;
+     }
+
+     // Level Box styles
+     .levelBox {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       padding: 1rem;
+       background: rgba(255, 255, 255, 0.1);
+       border-radius: 8px;
+       backdrop-filter: blur(10px);
+       border: 1px solid rgba(255, 255, 255, 0.2);
+       
+       i {
+         font-style: normal;
+         font-size: 0.875rem;
+         color: white;
+         font-weight: 500;
+       }
+     }
+
+     // Circle styles
+     .circle {
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       background: rgba(255, 255, 255, 0.1);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border: 2px solid rgba(255, 255, 255, 0.3);
+       transition: all 0.3s ease;
+
+       &:hover {
+         transform: scale(1.1);
+         background: rgba(255, 255, 255, 0.2);
+       }
+
+       .circleSpan {
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         background: rgba(255, 255, 255, 0.2);
+         transition: transform 0.3s ease;
+       }
+     }
+ }
+
+ .style_ui_Dxt99 {
+   font-size: 18vw;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: absolute;
+   inset: 0;
+   mix-blend-mode: difference;
+   gap: calc(38vh + 5rem);
+   z-index: 5;
+   font-weight: 500;
+
+   span {
+     flex: 1 1;
+   }
+
+   span:first-child {
+     text-align: right;
+   }
+ }
+
+
+
+ .sliderContainer {
+   position: absolute;
+   bottom: 1rem;
+   mix-blend-mode: difference;
+   z-index: 10;
+
+   .slider {
+     position: relative;
+     white-space: nowrap;
+
+     p {
+       font-size: 10vw;
+       font-weight: 500;
+       padding-right: 50px;
+       margin: 0px;
+     }
+
+     p:nth-of-type(2) {
+       position: absolute;
+       left: 100%;
+       top: 0px;
+     }
+   }
+ }
+

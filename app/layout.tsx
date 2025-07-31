@@ -3,12 +3,18 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { manrope, figtree } from "./fonts"
 import { cn } from "@/lib/utils"
-import { CustomCursor } from "@/src/components/custom-cursor"
 
 export const metadata: Metadata = {
-  title: "Happiest People Productions",
-  description: "Crafting impactful video content that captivates audiences and drives results.",
-  generator: "Next.js",
+  title: "Portfolio | JITHINRAJ",
+  description: "Frontend Developer Portfolio",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
@@ -18,9 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(manrope.variable, figtree.variable)}>
+      <head>
+        <link rel="icon" href="/logo.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/logo.ico" type="image/x-icon" />
+      </head>
       <body>
-      <CustomCursor />
-
         {children}</body>
     </html>
   )

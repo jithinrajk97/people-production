@@ -24,16 +24,15 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { name: "About Us", href: "#" },
-    { name: "Testimonials", href: "#" },
-    { name: "Careers", href: "#" },
+    { name: "Works", href: "#" },
+    { name: "About", href: "#" },
     { name: "Contact Us", href: "#" },
   ]
 
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-colors duration-300",
+        "fixed top-0 z-50 w-full transition-colors duration-300 py-4",
         isScrolled ? "bg-black/80 backdrop-blur-sm" : "bg-transparent",
       )}
     >
@@ -41,13 +40,13 @@ export function Header() {
         <div className="flex items-center justify-between h-24">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
-              <Image src="/logo-yellow.svg" alt="Agency Logo" width={84} height={58} className="h-16 w-auto" />
+              <Image src="/logo.svg" alt="Agency Logo" width={92} height={92} className="h-18 w-auto" />
             </Link>
           </div>
 
-          <nav className="hidden lg:flex items-center space-x-16">
+          <nav className="hidden lg:flex items-center space-x-16 lg:pr-20">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="text-lg font-medium text-gray-300 hover:text-primary-brand">
+              <Link key={link.name} href={link.href} className="text-lg font-medium text-black hover:text-primary-brand">
                 {link.name}
               </Link>
             ))}
