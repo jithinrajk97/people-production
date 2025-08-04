@@ -10,23 +10,20 @@ const useHomeInfo = () => {
   gsap.registerPlugin(ScrollTrigger);
   const { width } = useGetDeviceType();
 
-  // Memoize device type to prevent unnecessary re-renders
   const isDesktop = useMemo(() => width > 991, [width]);
 
   useGSAP(() => {
-    // Only run animations on desktop
+
     if (!isDesktop) return;
 
     ScrollTrigger.matchMedia({
       "(min-width: 992px)": function () {
-        gsap.set(secondSection.current, { clipPath: "circle(0%)"});
+        gsap.set(secondSection.current, { clipPath: "circle(0%)"}); 
         gsap.set(card7.current, { xPercent: -90, yPercent:0, scale: 1 });
-        gsap.set(".badge", { xPercent: -90, yPercent:0, opacity: 0 });
-        gsap.set(".content", { xPercent: 90, yPercent:0, opacity: 0 });
+        gsap.set(".badge", { xPercent: -20, yPercent:0, opacity: 0 });
+        gsap.set(".content", { xPercent: 25, yPercent:0, opacity: 0 , });
         
 
-
-        // Pin the first section (hero) on top
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: secondSection.current,
@@ -40,9 +37,9 @@ const useHomeInfo = () => {
         });
         
         tl.to(secondSection.current, { clipPath: "circle(100%)" })
-        tl.to(card7.current, { xPercent: 0, yPercent:0, scale: 1.3},"<");
-        tl.to(".badge", { xPercent: 0, yPercent:0, opacity: 1},"<.4");
-        tl.to(".content", { xPercent: 0, yPercent:0, opacity: 1},"<.4");
+        tl.to(card7.current, { xPercent: 0, yPercent:0, scale: 1.3},"<.2");
+        tl.to(".badge", { xPercent: 0, yPercent:0, opacity: 1},"<.2");
+        tl.to(".content", { xPercent: 0, yPercent:0, opacity: 1},"<.2");
 
       } 
     });

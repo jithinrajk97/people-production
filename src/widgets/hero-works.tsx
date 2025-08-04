@@ -28,7 +28,7 @@ const projects: Project[] = [
     title: "Cafs",
     category: "Design & Development",
     previewImage: "/images/image-2.webp",
-    link: "#",
+    link: "https://www.cafs.in/",
   },
   {
     id: 3,
