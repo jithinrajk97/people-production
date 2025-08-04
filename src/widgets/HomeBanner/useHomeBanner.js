@@ -29,7 +29,7 @@ const useHomeBanner = () => {
             pinSpacing: false,
             start: "top top",
             end: "bottom top-=30%",
-            markers: true,
+            // markers: true,
             scrub: true,
           },
         });
