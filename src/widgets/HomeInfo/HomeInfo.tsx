@@ -22,6 +22,27 @@ export function HomeInfo() {
       className="relative flex h-screen overflow-hidden bg-[#000] text-white second align-middle items-center"
       ref={secondSection}
     >
+      {/* Gradient Shape Image as Right Side Background */}
+      <div className="absolute top-0 right-0 w-1/2 h-full z-10">
+        <Image
+          src="/images/shapes.webp"
+          alt="Gradient Shapes Background"
+          fill
+          className="object-cover opacity-60"
+          priority
+        />
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-full max-w-[200px] h-full max-h-[400px] z-10">
+        <Image
+          src="/images/shapes.webp"
+          alt="Gradient Shapes Background"
+          fill
+          className="object-cover opacity-60"
+          priority
+        />
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="lg:col-span-1">
@@ -29,10 +50,14 @@ export function HomeInfo() {
               <h1 className="text-7xl font-bold text-white mb-5 font-sans italic">
                 Hi, I'm <span className="font-bold">Jithinraj</span>
               </h1>
-              <h4 className="text-[#b1b6cb] text-4xl italic">
-                I enjoy creating products from scratch and improve existing
-                ones. In simple terms, I design websites that make a profit or
-                enhance business.
+              <h4 className="text-[#b1b6cb] text-xl 3xl:text-3xl italic">
+                As a seasoned UI/UX developer with over a decade of experience,
+                I specialize in creating seamless and intuitive digital
+                experiences using the latest frameworks. My expertise in React,
+                Next.js, and Spline allows me to craft engaging and responsive
+                designs that elevate user interaction. Let’s collaborate to
+                enhance your online presence and bring your digital vision to
+                life!
               </h4>
               {/* View All Button */}
               <div className="lg:mt-8 flex ">
@@ -58,7 +83,7 @@ export function HomeInfo() {
               </figure>
 
               {/* Badges positioned around the figure */}
-              <div className="absolute badge -left-4 top-1/4 bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-4 py-2 rounded-full text-sm font-medium shadow-lg shadow-purple-500/20">
+              <div className="absolute badge -left-1 top-1/4 bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-4 py-2 rounded-full text-sm font-medium shadow-lg shadow-purple-500/20">
                 Intractive UI
               </div>
               <div className="absolute badge -right-4 top-1/4 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 text-blue-300 px-4 py-2 rounded-full text-sm font-medium shadow-lg shadow-blue-500/20">
