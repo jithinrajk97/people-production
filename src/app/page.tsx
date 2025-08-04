@@ -1,9 +1,10 @@
 import { Header } from "@/src/widgets/header";
-import { HeroSection } from "@/src/widgets/HomeBanner/hero-section";
+import { HeroSection } from "@/src/widgets/HomeBanner/HomeBanner";
 import { Footer } from "@/src/widgets/footer";
 import GlobalProviders from "../components/GlobalProviders";
 import { HomeWorks } from "../widgets/hero-works";
 import { HomeAbout } from "../widgets/home-about";
+import { HomeInfo } from "../widgets/HomeInfo/HomeInfo";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,8 @@ export default function HomePage() {
         <Header />
         <>
           <HeroSection />
+          <HomeInfo />
+          <HomeWorks />
         </>
         {/* <Footer /> */}
       </GlobalProviders>

@@ -32,8 +32,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-colors duration-300 py-4",
-        isScrolled ? "bg-black/80 backdrop-blur-sm" : "bg-transparent",
+        "fixed top-0 z-50 w-full transition-colors duration-300 py-4"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +45,7 @@ export function Header() {
 
           <nav className="hidden lg:flex items-center space-x-16 lg:pr-20">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="text-lg font-medium text-black hover:text-primary-brand">
+              <Link key={link.name} href={link.href} className="text-lg font-medium text-white hover:text-primary-brand">
                 {link.name}
               </Link>
             ))}
