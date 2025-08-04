@@ -56,6 +56,9 @@ const config = {
       fontFamily: {
         sans: ["var(--font-manrope)"],
         heading: ["var(--font-figtree)"],
+        // Add more custom font families here
+        mono: ["var(--font-roboto-mono)", "monospace"],
+        serif: ["var(--font-playfair-display)", "serif"],
       },
       fontSize: {
         // Custom font sizes - you can modify these values

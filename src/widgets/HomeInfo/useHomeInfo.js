@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Power4, gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,19 +10,20 @@ const useHomeInfo = () => {
   gsap.registerPlugin(ScrollTrigger);
   const { width } = useGetDeviceType();
 
+  // Memoize device type to prevent unnecessary re-renders
+  const isDesktop = useMemo(() => width > 991, [width]);
+
   useGSAP(() => {
+    // Only run animations on desktop
+    if (!isDesktop) return;
+
     ScrollTrigger.matchMedia({
       "(min-width: 992px)": function () {
-
-        
-
         gsap.set(secondSection.current, { clipPath: "circle(0%)"});
-
-        gsap.set(card7.current, { xPercent: -80, yPercent:0, scale: 1 });
-        // const card_item = gsap.utils.toArray(`.badge`);
-        // gsap.set(card_item, { xPercent: -80, yPercent:0, opacity: 0 });
-
-
+        gsap.set(card7.current, { xPercent: -90, yPercent:0, scale: 1 });
+        gsap.set(".badge", { xPercent: -90, yPercent:0, opacity: 0 });
+        gsap.set(".content", { xPercent: 90, yPercent:0, opacity: 0 });
+        
 
 
         // Pin the first section (hero) on top
@@ -33,21 +34,19 @@ const useHomeInfo = () => {
             pinSpacing: true,
             animation: true,
             start: "top top",
-            end: "bottom 60%",
+            end: "+=200%",
             scrub: true,
           },
         });
         
+        tl.to(secondSection.current, { clipPath: "circle(100%)" })
+        tl.to(card7.current, { xPercent: 0, yPercent:0, scale: 1.3},"<");
+        tl.to(".badge", { xPercent: 0, yPercent:0, opacity: 1},"<.4");
+        tl.to(".content", { xPercent: 0, yPercent:0, opacity: 1},"<.4");
 
-        tl.to(secondSection.current, { clipPath: "circle(100%)", duration: 1, })
-        tl.to(card7.current, { xPercent: 0, yPercent:0, scale: 1.3, duration: 1},"<.2");
-        // tl.to(card_item, { xPercent: 0, yPercent:0, scale: 1.3,opacity: 1, duration: 1},"<");
-        
-
-    
       } 
     });
-  }, { scope: secondSection });
+  }, { scope: secondSection, dependencies: [isDesktop] });
 
   return {
     secondSection,

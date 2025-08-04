@@ -1,9 +1,24 @@
 "use client"
 import { useSyncExternalStore } from "react";
 
+// Throttle function to limit resize events
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function() {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+}
+
 const subscribe = (callback) => {
-  window.addEventListener("resize", callback);
-  return window.removeEventListener("resize", callback);
+  const throttledCallback = throttle(callback, 100); // Throttle to 100ms
+  window.addEventListener("resize", throttledCallback);
+  return () => window.removeEventListener("resize", throttledCallback);
 };
 
 const useGetInnerWidth = () => {

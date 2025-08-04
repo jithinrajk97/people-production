@@ -3,25 +3,41 @@
 import { Menu } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
+// Throttle function
+const throttle = (func: Function, limit: number) => {
+  let inThrottle: boolean;
+  return function(this: any) {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+}
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 10)
   }, [])
+
+  useEffect(() => {
+    const throttledHandleScroll = throttle(handleScroll, 16) // ~60fps
+
+    window.addEventListener("scroll", throttledHandleScroll)
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll)
+    }
+  }, [handleScroll])
 
   const navLinks = [
     { name: "Works", href: "#" },
