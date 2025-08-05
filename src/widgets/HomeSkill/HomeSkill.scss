@@ -1,0 +1,104 @@
+.sec-padding {
+  padding: 6rem 0;
+}
+
+.skill-card {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+  }
+}
+
+// Tool badge animations
+.skill-card .flex.flex-wrap.gap-2 > div {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+  }
+}
+
+// Icon container glow effect
+.skill-card .w-12.h-12 {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::after {
+    opacity: 0.5;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .sec-padding {
+    padding: 4rem 0;
+  }
+  
+  .skill-card {
+    padding: 1.5rem;
+  }
+  
+  .skill-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .skill-card p {
+    font-size: 0.875rem;
+  }
+}
+
+// Animation classes for GSAP
+.skill-card {
+  will-change: transform, opacity;
+}
+
+// Custom scrollbar for the section
+section::-webkit-scrollbar {
+  width: 8px;
+}
+
+section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+section::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border-radius: 4px;
+}
+
+section::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+} 

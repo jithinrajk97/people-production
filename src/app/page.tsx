@@ -5,6 +5,7 @@ import GlobalProviders from "../components/GlobalProviders";
 import { HomeWorks } from "../widgets/hero-works";
 import { HomeAbout } from "../widgets/home-about";
 import { HomeInfo } from "../widgets/HomeInfo/HomeInfo";
+import { HomeSkill } from "../widgets/HomeSkill/HomeSkill";
 
 export default function HomePage() {
   return (
@@ -15,8 +16,10 @@ export default function HomePage() {
           <HeroSection />
           <HomeInfo />
           <HomeWorks />
+          <HomeSkill />
+
         </>
-        {/* <Footer /> */}
+        <Footer />
       </GlobalProviders>
     </div>
   );
