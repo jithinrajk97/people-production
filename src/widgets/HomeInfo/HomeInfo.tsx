@@ -33,7 +33,7 @@ export function HomeInfo() {
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full max-w-[200px] h-full max-h-[400px] z-10">
+      <div className="absolute bottom-0 left-0 w-full max-w-[200px] h-full max-h-[400px] z-10 pointer-events-none">
         <Image
           src="/images/shapes.webp"
           alt="Gradient Shapes Background"
@@ -51,7 +51,7 @@ export function HomeInfo() {
                 Hi, I'm <span className="font-bold">Jithinraj</span>
               </h1>
               <h4 className="text-[#b1b6cb] text-xl 3xl:text-3xl italic">
-                As a seasoned UI/UX developer with over a decade of experience,
+                As a seasoned Frontend / UI-UX developer with over a decade of experience,
                 I specialize in creating seamless and intuitive digital
                 experiences using the latest frameworks. My expertise in React,
                 Next.js, and Spline allows me to craft engaging and responsive
@@ -61,7 +61,7 @@ export function HomeInfo() {
               </h4>
               {/* View All Button */}
               <div className="lg:mt-8 flex ">
-                <button className="group text-base relative border border-white bg-transparent text-white px-6 py-2  font-medium hover:bg-white hover:text-black transition-all duration-300 ease-in-out">
+                <button className="group relative z-20 text-base  border border-white bg-transparent text-white px-6 py-2  font-medium hover:bg-white hover:text-black transition-all duration-300 ease-in-out">
                   Download CV
                 </button>
               </div>

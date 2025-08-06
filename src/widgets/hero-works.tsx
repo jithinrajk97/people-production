@@ -19,14 +19,14 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Webandcrafts",
-    category: "Website",
+    category: "Development",
     previewImage: "/images/image-1.webp",
-    link: "#",
+    link: "https://webandcrafts.com/",
   },
   {
     id: 2,
     title: "Cafs",
-    category: "Design & Development",
+    category: "Development",
     previewImage: "/images/image-2.webp",
     link: "https://www.cafs.in/",
   },
@@ -35,21 +35,21 @@ const projects: Project[] = [
     title: "Kent Construction",
     category: "Development",
     previewImage: "/images/image-3.webp",
-    link: "#",
+    link: "https://www.kenthomes.in/",
   },
   {
     id: 4,
     title: "Nestu Health",
     category: "Design & Development",
     previewImage: "/images/image-4.webp",
-    link: "#",
+    link: "https://nestu.health",
   },
   {
     id: 5,
     title: "Innovative Slide",
     category: "Plugin",
     previewImage: "/images/image-2.webp",
-    link: "#",
+    link: "https://github.com/innovative-slide",
   },
 ];
 
@@ -59,7 +59,7 @@ export function HomeWorks() {
   const [smoothMousePosition, setSmoothMousePosition] = useState({ x: 0, y: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
   const viewButtonRef = useRef<HTMLDivElement>(null);
-  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const projectRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const animationRefs = useRef<{ [key: string]: gsap.core.Tween }>({});
   const mouseAnimationRef = useRef<gsap.core.Tween | null>(null);
 
@@ -217,12 +217,15 @@ export function HomeWorks() {
           <div className="">
             <div className="space-y-0">
               {projects.map((project, index) => (
-                <div
+                <a
                   key={project.id}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   ref={(el) => {
                     projectRefs.current[index] = el;
                   }}
-                  className="border-b border-gray-200 py-8 md:py-12 cursor-pointer group"
+                  className="border-b border-gray-200 py-8 md:py-12 cursor-pointer group block"
                   onMouseEnter={() => handleProjectHover(project.id)}
                   onMouseLeave={handleProjectLeave}
                 >
@@ -234,7 +237,7 @@ export function HomeWorks() {
                       {project.category}
                     </span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

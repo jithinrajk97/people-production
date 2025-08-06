@@ -5,7 +5,7 @@ import { manrope, figtree } from "./fonts"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Portfolio | JITHINRAJ",
+  title: "Jithinraj | Frontend Developer | UI-UX Designer | Web Developer",
   description: "Frontend Developer Portfolio",
   icons: {
     icon: [
