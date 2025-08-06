@@ -7,6 +7,7 @@ import useGetDeviceType from "@/src/hooks/useGetDeviceType";
 const useHomeBanner = () => {
   const main = useRef();
   const circleRef = useRef();
+  const layerRef = useRef();
   gsap.registerPlugin(ScrollTrigger);
   const { width } = useGetDeviceType();
 
@@ -28,13 +29,17 @@ const useHomeBanner = () => {
             pin: true,
             pinSpacing: false,
             start: "top top",
-            end: "bottom top-=30%",
+            end: "+=200%%",
             // markers: true,
             scrub: true,
           },
         });
         
         // First: Scale up the circle
+      
+        tl.to(layerRef.current, { 
+          rotate: 0,
+        }, "<");
         tl.to(circleRef.current, { 
           scale: 3, 
           backgroundColor: "#000",
@@ -44,23 +49,21 @@ const useHomeBanner = () => {
          color: "#fff",
          opacity: 0,
         }, "<")
+        
+     
 
         // Animate the UI/UX spans
         tl.to(".ui_ux .ui", { 
          xPercent: -30,
-          opacity: 0,
-        }, "<")
+          opacity: .2,
+        }, "a")
 
         tl.to(".ui_ux .ux", { 
           xPercent: 30,
-           opacity: 0,
-         }, "<")
+           opacity: .2,
+         }, "a")
         // Second: Hide the main section
-        .to(main.current, { 
-          opacity: 0, 
-          duration: 1,
-          ease: "power2.in"
-        });
+       
       } 
     });
   }, { scope: main, dependencies: [isDesktop] });
@@ -69,6 +72,7 @@ const useHomeBanner = () => {
     main,
     circleRef,
     width,
+    layerRef,
   };
 };
 

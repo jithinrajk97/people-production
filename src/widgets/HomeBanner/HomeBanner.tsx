@@ -9,7 +9,7 @@ import useHomeBanner from "./useHomeBanner";
 import "./HomeBanner.scss";
 
 export function HeroSection() {
-  const { main, circleRef, width } = useHomeBanner();
+  const { main, circleRef, width ,layerRef} = useHomeBanner();
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
@@ -64,6 +64,7 @@ export function HeroSection() {
           <div
             className="bg-layer bgCircleLayer"
             style={{ transform: "rotate(-25.5deg)" }}
+            ref={layerRef}
           >
             {/* Level Box 1 */}
             <div className="levelBox">

@@ -31,12 +31,12 @@ const useHomeInfo = () => {
             pinSpacing: true,
             animation: true,
             start: "top top",
-            end: "+=200%",
+            end: "+=150%",
             scrub: true,
           },
         });
         
-        tl.to(secondSection.current, { clipPath: "circle(100%)" })
+        tl.to(secondSection.current, { clipPath: "circle(100%)", delay: 1.8 })
         tl.to(card7.current, { xPercent: 0, yPercent:0, scale: 1.3},"<.2");
         tl.to(".badge", { xPercent: 0, yPercent:0, opacity: 1},"<.2");
         tl.to(".content", { xPercent: 0, yPercent:0, opacity: 1},"<.2");
