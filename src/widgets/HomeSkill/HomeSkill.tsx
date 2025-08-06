@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Circle, Square, Star, Layers, Diamond, Palette, Code, Zap, Database, Box, Globe, Layers3, Sparkles, FileCode, Type, Server } from "lucide-react";
@@ -22,57 +22,59 @@ interface SkillCard {
   }[];
 }
 
-const skills: SkillCard[] = [
-  {
-    id: 1,
-    icon: <Circle className="w-8 h-8" />,
-    title: "UI/UX Designing",
-    description: "Creating intuitive and engaging user experiences through thoughtful interface design. Specializing in user research, wireframing, prototyping, and crafting pixel-perfect designs that balance aesthetics with functionality.",
-    tools: [
-      { name: "Figma", icon: <Palette className="w-4 h-4" />, color: "from-orange-400 to-pink-500" },
-      { name: "Adobe XD", icon: <Type className="w-4 h-4" />, color: "from-purple-400 to-pink-500" }
-    ]
-  },
-  {
-    id: 2,
-    icon: <Square className="w-8 h-8" />,
-    title: "Frontend Development",
-    description: "Building responsive and performant web applications using modern JavaScript frameworks. Focused on creating seamless user experiences with clean, maintainable code and optimal performance.",
-    tools: [
-      { name: "Next Js", icon: <Globe className="w-4 h-4" />, color: "from-gray-400 to-gray-600" },
-      { name: "React Js", icon: <Layers3 className="w-4 h-4" />, color: "from-blue-400 to-cyan-500" },
-      { name: "Tailwind", icon: <Sparkles className="w-4 h-4" />, color: "from-cyan-400 to-blue-500" },
-      { name: "Bootstrap", icon: <FileCode className="w-4 h-4" />, color: "from-purple-400 to-indigo-500" }
-    ]
-  },
-  {
-    id: 3,
-    icon: <Star className="w-8 h-8" />,
-    title: "Interactive Development",
-    description: "Developing dynamic and engaging web experiences through advanced animations and interactive elements. Implementing smooth transitions and micro-interactions that enhance user engagement.",
-    tools: [
-      { name: "GSAP", icon: <Zap className="w-4 h-4" />, color: "from-green-400 to-emerald-500" },
-      { name: "Three JS", icon: <Box className="w-4 h-4" />, color: "from-gray-400 to-gray-600" }
-    ]
-  },
-  {
-    id: 4,
-    icon: <Layers className="w-8 h-8" />,
-    title: "CMS Development",
-    description: "Implementing flexible content management solutions that empower clients to easily update and maintain their websites. Creating custom themes and plugins while ensuring security and performance.",
-    tools: [
-      { name: "Strapi", icon: <Server className="w-4 h-4" />, color: "from-purple-400 to-pink-500" },
-      { name: "Wordpress", icon: <Database className="w-4 h-4" />, color: "from-blue-400 to-indigo-500" }
-    ]
-  },
-];
-
 export function HomeSkill() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Memoize the skills array to prevent recreation on every render
+  const skills: SkillCard[] = useMemo(() => [
+    {
+      id: 1,
+      icon: <Circle className="w-8 h-8" />,
+      title: "UI/UX Designing",
+      description: "Creating intuitive and engaging user experiences through thoughtful interface design. Specializing in user research, wireframing, prototyping, and crafting pixel-perfect designs that balance aesthetics with functionality.",
+      tools: [
+        { name: "Figma", icon: <Palette className="w-4 h-4" />, color: "from-orange-400 to-pink-500" },
+        { name: "Adobe XD", icon: <Type className="w-4 h-4" />, color: "from-purple-400 to-pink-500" }
+      ]
+    },
+    {
+      id: 2,
+      icon: <Square className="w-8 h-8" />,
+      title: "Frontend Development",
+      description: "Building responsive and performant web applications using modern JavaScript frameworks. Focused on creating seamless user experiences with clean, maintainable code and optimal performance.",
+      tools: [
+        { name: "Next Js", icon: <Globe className="w-4 h-4" />, color: "from-gray-400 to-gray-600" },
+        { name: "React Js", icon: <Layers3 className="w-4 h-4" />, color: "from-blue-400 to-cyan-500" },
+        { name: "Tailwind", icon: <Sparkles className="w-4 h-4" />, color: "from-cyan-400 to-blue-500" },
+        { name: "Bootstrap", icon: <FileCode className="w-4 h-4" />, color: "from-purple-400 to-indigo-500" }
+      ]
+    },
+    {
+      id: 3,
+      icon: <Star className="w-8 h-8" />,
+      title: "Interactive Development",
+      description: "Developing dynamic and engaging web experiences through advanced animations and interactive elements. Implementing smooth transitions and micro-interactions that enhance user engagement.",
+      tools: [
+        { name: "GSAP", icon: <Zap className="w-4 h-4" />, color: "from-green-400 to-emerald-500" },
+        { name: "Three JS", icon: <Box className="w-4 h-4" />, color: "from-gray-400 to-gray-600" }
+      ]
+    },
+    {
+      id: 4,
+      icon: <Layers className="w-8 h-8" />,
+      title: "CMS Development",
+      description: "Implementing flexible content management solutions that empower clients to easily update and maintain their websites. Creating custom themes and plugins while ensuring security and performance.",
+      tools: [
+        { name: "Strapi", icon: <Server className="w-4 h-4" />, color: "from-purple-400 to-pink-500" },
+        { name: "Wordpress", icon: <Database className="w-4 h-4" />, color: "from-blue-400 to-indigo-500" }
+      ]
+    },
+  ], []);
+
+  // Memoize the GSAP animation setup
+  const setupAnimations = useCallback(() => {
     if (typeof window === "undefined") return;
 
     const ctx = gsap.context(() => {
@@ -122,8 +124,13 @@ export function HomeSkill() {
       );
     });
 
-    return () => ctx.revert();
+    return ctx;
   }, []);
+
+  useEffect(() => {
+    const ctx = setupAnimations();
+    return () => ctx?.revert();
+  }, [setupAnimations]);
 
   return (
     <section className="sec-padding bg-black" ref={sectionRef}>

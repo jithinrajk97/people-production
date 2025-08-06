@@ -4,18 +4,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronRight, ChevronsDown } from "lucide-react";
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import "./HomeInfo.scss";
 import useHomeInfo from "./useHomeInfo";
 import Image from "next/image";
 
 export function HomeInfo() {
   const { secondSection, width, card7 } = useHomeInfo();
-
-  useEffect(() => {
-    // Add any initialization logic here
-    console.log("HomeInfo component mounted");
-  }, []);
 
   return (
     <section
@@ -55,7 +50,7 @@ export function HomeInfo() {
                 I specialize in creating seamless and intuitive digital
                 experiences using the latest frameworks. My expertise in React,
                 Next.js, and Spline allows me to craft engaging and responsive
-                designs that elevate user interaction. Let’s collaborate to
+                designs that elevate user interaction. Let's collaborate to
                 enhance your online presence and bring your digital vision to
                 life!
               </h4>

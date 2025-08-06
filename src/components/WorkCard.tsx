@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { memo } from "react"
 
 interface WorkCardProps {
   image: string
@@ -10,7 +11,7 @@ interface WorkCardProps {
   onClick?: () => void
 }
 
-export default function WorkCard({ image, title, ctaText = "Watch Now", onClick }: WorkCardProps) {
+const WorkCard = memo(function WorkCard({ image, title, ctaText = "Watch Now", onClick }: WorkCardProps) {
   return (
     <div
       className="bg-white  overflow-hidden  transition-all duration-300 group cursor-pointer"
@@ -33,4 +34,6 @@ export default function WorkCard({ image, title, ctaText = "Watch Now", onClick 
       </div>
     </div>
   )
-}
+})
+
+export default WorkCard

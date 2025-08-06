@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronsDown } from "lucide-react";
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback, useMemo } from "react";
 import useHomeBanner from "./useHomeBanner";
 import "./HomeBanner.scss";
 
@@ -14,12 +14,13 @@ export function HeroSection() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
-  useEffect(() => {
+  // Memoize the animation function to prevent recreation
+  const animate = useCallback(() => {
     let animationId: number;
     let translateValue = 0;
     const speed = 0.2; // Speed of movement in pixels per frame
 
-    const animate = () => {
+    const animateFrame = () => {
       if (sliderRef.current && paragraphRefs.current.length > 0) {
         translateValue -= speed;
 
@@ -35,10 +36,10 @@ export function HeroSection() {
           }
         });
       }
-      animationId = requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animateFrame);
     };
 
-    animate();
+    animateFrame();
 
     return () => {
       if (animationId) {
@@ -46,6 +47,11 @@ export function HeroSection() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const cleanup = animate();
+    return cleanup;
+  }, [animate]);
 
   return (
     <>
