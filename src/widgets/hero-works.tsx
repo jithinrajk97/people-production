@@ -211,7 +211,7 @@ export function HomeWorks() {
   }, []);
 
   return (
-    <section className="sec-padding bg-white">
+    <section className="sec-padding bg-white" id="works">
       <div className="container">
         <div className="lg:mt-0">
           <div className="">

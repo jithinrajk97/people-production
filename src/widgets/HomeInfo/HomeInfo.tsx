@@ -56,7 +56,17 @@ export function HomeInfo() {
               </h4>
               {/* View All Button */}
               <div className="lg:mt-8 flex ">
-                <button className="group relative z-20 text-base  border border-white bg-transparent text-white px-6 py-2  font-medium hover:bg-white hover:text-black transition-all duration-300 ease-in-out">
+                <button 
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
+                    link.download = 'JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="group relative z-20 text-base  border border-white bg-transparent text-white px-6 py-2  font-medium hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
+                >
                   Download CV
                 </button>
               </div>

@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 
 export function Footer() {
   const buttonRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const circleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // GSAP hover animations for buttons
@@ -84,6 +85,39 @@ export function Footer() {
         }
       });
     });
+
+    // Circle rotation animation
+    if (circleRef.current) {
+      // Continuous rotation
+      gsap.to(circleRef.current, {
+        rotation: 360,
+        duration: 9,
+        ease: "none",
+        repeat: -1
+      });
+
+      // Hover scale effect
+      circleRef.current.addEventListener("mouseenter", () => {
+        gsap.to(circleRef.current, {
+          scale: 1.2,
+          duration: 0.1,
+          ease: "power2.out"
+        });
+      });
+
+      circleRef.current.addEventListener("mouseleave", () => {
+        gsap.to(circleRef.current, {
+          scale: 1,
+          duration: 0.2,
+          ease: "power2.out"
+        });
+      });
+
+      // Click to redirect to WhatsApp
+      circleRef.current.addEventListener("click", () => {
+        window.open(`https://wa.me/971562590464`, '_blank');
+      });
+    }
   }, []);
 
   const contactInfo = [
@@ -115,10 +149,10 @@ export function Footer() {
   ];
 
   return (
-    <section className="bg-white text-black h-screen flex flex-col">
+    <section id="contact" className="bg-white text-black h-screen flex flex-col">
       <div className="container mx-auto px-4 flex-1 flex flex-col justify-between py-16">
         {/* Top section - Heading and divider */}
-        <div className="flex-1 flex flex-col justify-center ">
+        <div className="flex-1 flex flex-col justify-center relative">
           <div className="mb-12">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-xl md:text-6xl lg:text-6xl xl:text-8xl font-semibold leading-8">
@@ -148,6 +182,21 @@ export function Footer() {
               </a>
             ))}
           </div>
+
+          {/* Circle Rotate */}
+          <div className="circle-rotate hidden md:flex justify-center items-center my-8 absolute bottom-0  right-0">
+            <div 
+              ref={circleRef}
+              className="w-24 h-24 md:w-32 md:h-32 cursor-pointer transition-all duration-300"
+            >
+              <img 
+                src="/images/circle.png" 
+                alt="Rotating Circle" 
+                className="w-full h-full object-contain border rounded-full"
+              />
+            </div>
+          </div>
+
         </div>
 
         {/* Bottom section */}
@@ -175,6 +224,8 @@ export function Footer() {
           </div>
           
         </div>
+
+
       </div>
     </section>
   );

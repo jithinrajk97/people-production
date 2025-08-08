@@ -12,9 +12,9 @@ import { useThrottle } from "@/src/lib/performance"
 
 // Nav links moved outside component to prevent recreation
 const navLinks = [
-  { name: "Works", href: "#" },
-  { name: "About", href: "#" },
-  { name: "Contact Us", href: "#" },
+  { name: "Works", href: "#works" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact Us", href: "#contact" },
 ]
 
 export function Header() {
@@ -22,6 +22,19 @@ export function Header() {
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 10)
+  }, [])
+
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace('#', '')
+    const targetElement = document.getElementById(targetId)
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
   }, [])
 
   // Use the optimized throttle hook
@@ -50,9 +63,14 @@ export function Header() {
 
           <nav className="hidden lg:flex items-center space-x-16 lg:pr-20">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="text-lg  font-medium text-white hover:text-primary-brand">
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-lg font-medium text-white hover:text-primary-brand cursor-pointer"
+              >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -70,13 +88,14 @@ export function Header() {
                   </Link>
                   <nav className="flex flex-col gap-6">
                     {navLinks.map((link) => (
-                      <Link
+                      <a
                         key={link.name}
                         href={link.href}
-                        className="font-medium text-lg text-gray-300 hover:text-white"
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className="font-medium text-lg text-gray-300 hover:text-white cursor-pointer"
                       >
                         {link.name}
-                      </Link>
+                      </a>
                     ))}
                   </nav>
                 </div>

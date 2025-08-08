@@ -29,7 +29,8 @@ const useHomeBanner = () => {
             pin: true,
             pinSpacing: false,
             start: "top top",
-            end: "+=200%%",
+            animation: true,
+            end: "+=200%",
             // markers: true,
             scrub: true,
           },
@@ -56,12 +57,12 @@ const useHomeBanner = () => {
         tl.to(".ui_ux .ui", { 
          xPercent: -30,
           opacity: .2,
-        }, "a")
+        }, "<")
 
         tl.to(".ui_ux .ux", { 
           xPercent: 30,
            opacity: .2,
-         }, "a")
+         }, "<")
         // Second: Hide the main section
        
       } 

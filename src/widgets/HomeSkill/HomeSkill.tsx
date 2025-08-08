@@ -133,7 +133,7 @@ export function HomeSkill() {
   }, [setupAnimations]);
 
   return (
-    <section className="sec-padding bg-black" ref={sectionRef}>
+    <section id="skills" className="sec-padding bg-black" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h1 className="text-2xl font-medium text-gray-400 mb-4">My Skills</h1>
