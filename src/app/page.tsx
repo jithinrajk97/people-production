@@ -15,6 +15,7 @@ const HomePageContent = memo(function HomePageContent() {
       <HomeInfo />
       <HomeWorks />
       <HomeSkill />
+      <HomeAbout />
     </>
   );
 });

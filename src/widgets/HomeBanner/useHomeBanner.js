@@ -42,14 +42,14 @@ const useHomeBanner = () => {
           rotate: 0,
         }, "<");
         tl.to(circleRef.current, { 
-          scale: 3, 
+          scale: 2.5, 
           backgroundColor: "#000",
         }, "<")
 
-        tl.to(".circleSpan", { 
-         color: "#fff",
-         opacity: 0,
-        }, "<")
+        // tl.to(".circleSpan", { 
+        //  color: "#fff",
+        //  opacity: 0,
+        // }, "<")
         
      
 

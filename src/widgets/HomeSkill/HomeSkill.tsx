@@ -58,7 +58,9 @@ export function HomeSkill() {
       description: "Developing dynamic and engaging web experiences through advanced animations and interactive elements. Implementing smooth transitions and micro-interactions that enhance user engagement.",
       tools: [
         { name: "GSAP", icon: <Zap className="w-4 h-4" />, color: "from-green-400 to-emerald-500" },
-        { name: "Three JS", icon: <Box className="w-4 h-4" />, color: "from-gray-400 to-gray-600" }
+        { name: "Three JS", icon: <Box className="w-4 h-4" />, color: "from-gray-400 to-gray-600" },
+        { name: "Framer Motion", icon: <FileCode className="w-4 h-4" />, color: "from-gray-400 to-gray-600" }
+
       ]
     },
     {
@@ -68,7 +70,8 @@ export function HomeSkill() {
       description: "Implementing flexible content management solutions that empower clients to easily update and maintain their websites. Creating custom themes and plugins while ensuring security and performance.",
       tools: [
         { name: "Strapi", icon: <Server className="w-4 h-4" />, color: "from-purple-400 to-pink-500" },
-        { name: "Wordpress", icon: <Database className="w-4 h-4" />, color: "from-blue-400 to-indigo-500" }
+        { name: "Wordpress", icon: <Database className="w-4 h-4" />, color: "from-blue-400 to-indigo-500" },
+        
       ]
     },
   ], []);

@@ -42,10 +42,10 @@ export function HomeInfo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="lg:col-span-1">
             <div className="content">
-              <h1 className="text-7xl font-bold text-white mb-5 font-sans italic">
+              <h1 className="lg:text-7xl text-5xl font-bold text-white lg:mb-5 mb-6 font-sans italic">
                 Hi, I'm <span className="font-bold">Jithinraj</span>
               </h1>
-              <h4 className="text-[#b1b6cb] text-xl 3xl:text-3xl italic">
+              <h4 className="text-[#b1b6cb] text-2xl lg:text-3xl italic">
                 As a seasoned Frontend / UI-UX developer with over a decade of experience,
                 I specialize in creating seamless and intuitive digital
                 experiences using the latest frameworks. My expertise in React,
@@ -55,7 +55,7 @@ export function HomeInfo() {
                 life!
               </h4>
               {/* View All Button */}
-              <div className="lg:mt-8 flex ">
+              <div className="mt-10 lg:mt-8 flex ">
                 <button 
                   onClick={() => {
                     const link = document.createElement('a');
@@ -72,7 +72,7 @@ export function HomeInfo() {
               </div>
             </div>
           </div>
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 lg:block hidden">
             <div className="relative">
               <figure
                 className="aspect-[2/3] max-w-[400px] relative mx-auto"

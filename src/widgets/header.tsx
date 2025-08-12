@@ -78,13 +78,13 @@ export function Header() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6 text-white" />
+                  <Menu className="h-6 w-6 text-black" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="bg-black/90 text-white border-gray-800">
                 <div className="p-4">
                   <Link href="/" className="mb-8 block">
-                    <Image src="/logo-yellow.svg" alt="Agency Logo" width={64} height={45} />
+                    <Image src="/logo.svg" alt="Agency Logo" width={64} height={45} />
                   </Link>
                   <nav className="flex flex-col gap-6">
                     {navLinks.map((link) => (

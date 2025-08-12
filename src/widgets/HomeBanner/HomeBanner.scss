@@ -34,7 +34,7 @@
 
   // Level Box styles
   .levelBox {
-    display: flex;
+    @apply lg:flex hidden;
     align-items: center;
     justify-content: center;
     padding: .2rem 1rem;
@@ -93,6 +93,10 @@
   inset: 0;
   mix-blend-mode: difference;
   gap: calc(38vh + 5rem);
+  @media (max-width: 768px) {
+    font-size: 18vw;
+    gap: calc(20vh + 2rem);
+  }
   z-index: 5;
   font-weight: 500;
 
@@ -119,6 +123,9 @@
 
     p {
       font-size: 10vw;
+      @media (max-width: 768px) {
+        font-size: 20vw;
+      }
       font-weight: 500;
       padding-right: 50px;
       margin: 0px;

@@ -6,10 +6,12 @@ import { ArrowRight, ChevronsDown } from "lucide-react";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { useEffect, useRef, useCallback, useMemo } from "react";
 import useHomeBanner from "./useHomeBanner";
+import useGetDeviceType from "../../hooks/useGetDeviceType";
 import "./HomeBanner.scss";
 
 export function HeroSection() {
   const { main, circleRef, width ,layerRef} = useHomeBanner();
+  const { isMobile } = useGetDeviceType();
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
@@ -63,11 +65,11 @@ export function HeroSection() {
         <div>
           <div
             className="bg-layer bgCircleLayer"
-            style={{ transform: "rotate(-25.5deg)" }}
+            style={{ transform: isMobile ? "rotate(0deg)" : "rotate(-25.5deg)" }}
             ref={layerRef}
           >
             {/* Level Box 1 */}
-            <div className="levelBox">
+            <div className="levelBox ">
               <i>29deg</i>
             </div>
 
