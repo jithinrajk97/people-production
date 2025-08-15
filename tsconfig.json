@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/widgets/HomeInfo/useHomeInfo.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/widgets/HomeInfo/useHomeInfo.js", "src/customHook/useFetch.js", "src/widgets/home-about.js"],
   "exclude": ["node_modules"]
 }
