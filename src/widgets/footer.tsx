@@ -15,7 +15,7 @@ const contactInfo = [
   {
     type: "phone",
     value: "+971 562590464",
-    icon: <Phone className="w-4 h-4" />,
+    icon: <Phone className="w-4 h-4 " />,
     href: "tel:+971562590464"
   },
   {
