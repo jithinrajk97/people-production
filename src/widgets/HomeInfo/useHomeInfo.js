@@ -4,10 +4,14 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useGetDeviceType from "@/src/hooks/useGetDeviceType";
 
+// Register plugin once outside component
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const useHomeInfo = () => {
   const secondSection = useRef();
   const card7 = useRef();
-  gsap.registerPlugin(ScrollTrigger);
   const { width } = useGetDeviceType();
 
   const isDesktop = useMemo(() => width > 991, [width]);

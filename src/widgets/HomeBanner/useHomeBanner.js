@@ -1,22 +1,31 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useCallback } from "react";
 import { Power4, gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useGetDeviceType from "@/src/hooks/useGetDeviceType";
 
+// Register plugin once outside component
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const useHomeBanner = () => {
   const main = useRef();
   const circleRef = useRef();
   const layerRef = useRef();
-  gsap.registerPlugin(ScrollTrigger);
+  const [rotationDegrees, setRotationDegrees] = useState(null);
+  const rotationRef = useRef(null);
   const { width } = useGetDeviceType();
 
   // Memoize device type to prevent unnecessary re-renders
   const isDesktop = useMemo(() => width > 991, [width]);
 
   useGSAP(() => {
-    // Only run animations on desktop
-    if (!isDesktop) return;
+    // Set initial rotation value for mobile (0deg)
+    if (!isDesktop) {
+      setRotationDegrees(0);
+      return;
+    }
 
     ScrollTrigger.matchMedia({
       "(min-width: 992px)": function () {
@@ -33,8 +42,22 @@ const useHomeBanner = () => {
             end: "+=200%",
             // markers: true,
             scrub: true,
+            onUpdate: (self) => {
+              // Get the current rotation value from the timeline
+              const progress = self.progress;
+              // Calculate rotation: starts at -25.5deg, ends at 0deg
+              const currentRotation = -25.5 + (progress * 25.5);
+              // Only update state if rotation changed significantly (reduce rerenders)
+              if (rotationRef.current === null || Math.abs(rotationRef.current - currentRotation) > 0.5) {
+                rotationRef.current = currentRotation;
+                setRotationDegrees(currentRotation);
+              }
+            },
           },
         });
+        
+        // Set initial rotation value
+        setRotationDegrees(-25.5);
         
         // First: Scale up the circle
       
@@ -74,6 +97,7 @@ const useHomeBanner = () => {
     circleRef,
     width,
     layerRef,
+    rotationDegrees,
   };
 };
 

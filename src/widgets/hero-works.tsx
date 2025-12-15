@@ -3,7 +3,7 @@
 import Link from "next/link";
 import WorkCard from "../components/WorkCard";
 import { ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo, memo } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -15,86 +15,99 @@ interface Project {
   link: string;
 }
 
+// Move projects array outside component to prevent recreation
 const projects: Project[] = [
   {
     id: 1,
     title: "Webandcrafts",
     category: "Development",
-    previewImage: "/images/image-1.webp",
+    previewImage: "/images/webandcrafts_logo.jpeg",
     link: "https://webandcrafts.com/",
   },
   {
     id: 2,
     title: "Cafs",
     category: "Development",
-    previewImage: "/images/image-2.webp",
+    previewImage: "/images/cafs.webp",
     link: "https://www.cafs.in/",
   },
   {
     id: 3,
     title: "Kent Construction",
     category: "Development",
-    previewImage: "/images/image-3.webp",
+    previewImage: "/images/kent.webp",
     link: "https://www.kenthomes.in/",
   },
   {
     id: 4,
     title: "Nestu Health",
     category: "Design & Development",
-    previewImage: "/images/image-4.webp",
+    previewImage: "/images/nestu-1.webp",
     link: "https://nestu.health",
   },
   {
     id: 5,
-    title: "Innovative Slide",
-    category: "Plugin",
+    title: "Airbooking",
+    category: "Development",
     previewImage: "/images/image-2.webp",
-    link: "https://github.com/innovative-slide",
+    link: "https://airbooking.com/",
+  },
+
+  {
+    id: 6,
+    title: "Happiest People Production",
+    category: "Development",
+    previewImage: "/images/hpp.jpg",
+    link: "https://happiest-people-production.vercel.app/",
   },
 ];
 
-export function HomeWorks() {
+export const HomeWorks = memo(function HomeWorks() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePositionRef = useRef({ x: 0, y: 0 });
   const [smoothMousePosition, setSmoothMousePosition] = useState({ x: 0, y: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
   const viewButtonRef = useRef<HTMLDivElement>(null);
   const projectRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const animationRefs = useRef<{ [key: string]: gsap.core.Tween }>({});
   const mouseAnimationRef = useRef<gsap.core.Tween | null>(null);
+  
+  // Memoize project lookup to prevent recalculation
+  const hoveredProjectData = useMemo(() => {
+    return hoveredProject ? projects.find((p) => p.id === hoveredProject) : null;
+  }, [hoveredProject]);
 
-  // Smooth mouse tracking with interpolation
+  // Smooth mouse tracking with interpolation - use ref to avoid state updates
   useEffect(() => {
+    const smoothPosRef = { x: smoothMousePosition.x, y: smoothMousePosition.y };
+    
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
+      
+      // Update smooth position directly via GSAP without state updates
+      if (mouseAnimationRef.current) {
+        mouseAnimationRef.current.kill();
+      }
+
+      mouseAnimationRef.current = gsap.to(smoothPosRef, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1,
+        ease: "power2.out",
+        onUpdate: function() {
+          setSmoothMousePosition({ x: smoothPosRef.x, y: smoothPosRef.y });
+        }
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  // Smooth mouse position interpolation
-  useEffect(() => {
-    if (mouseAnimationRef.current) {
-      mouseAnimationRef.current.kill();
-    }
-
-    mouseAnimationRef.current = gsap.to(smoothMousePosition, {
-      x: mousePosition.x,
-      y: mousePosition.y,
-      duration: 0.1,
-      ease: "power2.out",
-      onUpdate: () => {
-        setSmoothMousePosition({ x: smoothMousePosition.x, y: smoothMousePosition.y });
-      }
-    });
-
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
       if (mouseAnimationRef.current) {
         mouseAnimationRef.current.kill();
       }
     };
-  }, [mousePosition.x, mousePosition.y]);
+  }, []);
 
   // Cleanup animations on unmount
   useEffect(() => {
@@ -254,17 +267,14 @@ export function HomeWorks() {
               }}
             >
               <div className="relative w-[300px] h-[225px] rounded-xl overflow-hidden shadow-2xl border border-gray-100">
-                <Image
-                  src={
-                    projects.find((p) => p.id === hoveredProject)
-                      ?.previewImage || ""
-                  }
-                  alt={
-                    projects.find((p) => p.id === hoveredProject)?.title || ""
-                  }
-                  fill
-                  className="object-cover"
-                />
+                {hoveredProjectData && (
+                  <Image
+                    src={hoveredProjectData.previewImage}
+                    alt={hoveredProjectData.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
 
                                  {/* Enhanced View Button */}
                  <div
@@ -282,4 +292,4 @@ export function HomeWorks() {
       </div>
     </section>
   );
-}
+});

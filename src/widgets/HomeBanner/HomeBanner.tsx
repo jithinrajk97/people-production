@@ -4,17 +4,19 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronsDown } from "lucide-react";
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useCallback, useMemo, useState, memo } from "react";
 import useHomeBanner from "./useHomeBanner";
 import useGetDeviceType from "../../hooks/useGetDeviceType";
 import "./HomeBanner.scss";
 
-export function HeroSection() {
-  const { main, circleRef, width ,layerRef} = useHomeBanner();
+export const HeroSection = memo(function HeroSection() {
+  const { main, circleRef, width ,layerRef, rotationDegrees} = useHomeBanner();
   const { isMobile } = useGetDeviceType();
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const levelBox1Ref = useRef<HTMLElement>(null);
+  const levelBox2Ref = useRef<HTMLElement>(null);
 
   // Memoize the animation function to prevent recreation
   const animate = useCallback(() => {
@@ -55,6 +57,24 @@ export function HeroSection() {
     return cleanup;
   }, [animate]);
 
+  // Memoize the transform style to prevent recalculation
+  const layerTransform = useMemo(() => {
+    return isMobile ? "rotate(0deg)" : "rotate(-25.5deg)";
+  }, [isMobile]);
+
+  // Update degree values dynamically based on rotation
+  useEffect(() => {
+    if (rotationDegrees !== null && !isMobile) {
+      const roundedDegrees = Math.round(rotationDegrees);
+      if (levelBox1Ref.current) {
+        levelBox1Ref.current.textContent = `${roundedDegrees}deg`;
+      }
+      if (levelBox2Ref.current) {
+        levelBox2Ref.current.textContent = `${-roundedDegrees}deg`;
+      }
+    }
+  }, [rotationDegrees, isMobile]);
+
   return (
     <>
       <section
@@ -65,17 +85,17 @@ export function HeroSection() {
         <div>
           <div
             className="bg-layer bgCircleLayer"
-            style={{ transform: isMobile ? "rotate(0deg)" : "rotate(-25.5deg)" }}
+            style={{ transform: layerTransform }}
             ref={layerRef}
           >
             {/* Level Box 1 */}
             <div className="levelBox ">
-              <i>29deg</i>
+              <i ref={levelBox1Ref}>29deg</i>
             </div>
 
             {/* Level Box 2 */}
             <div className="levelBox">
-              <i>-29deg</i>
+              <i ref={levelBox2Ref}>-29deg</i>
             </div>
           </div>
 
@@ -123,4 +143,4 @@ export function HeroSection() {
       </section>
     </>
   );
-}
+});

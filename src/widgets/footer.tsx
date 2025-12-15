@@ -1,10 +1,39 @@
 "use client";
 
 import { ArrowRight, Mail, Phone, FileText, Github, Linkedin, ExternalLink, Code } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo, useCallback, memo } from "react";
 import { gsap } from "gsap";
 
-export function Footer() {
+// Move static arrays outside component to prevent recreation
+const contactInfo = [
+  {
+    type: "email",
+    value: "jithinraj.k97@gmail.com",
+    icon: <Mail className="w-4 h-4" />,
+    href: "mailto:jithinraj.k97@gmail.com"
+  },
+  {
+    type: "phone",
+    value: "+971 562590464",
+    icon: <Phone className="w-4 h-4" />,
+    href: "tel:+971562590464"
+  },
+  {
+    type: "phone",
+    value: "+91 9746067693",
+    icon: <Phone className="w-4 h-4" />,
+    href: "tel:+919746067693"
+  }
+];
+
+const socialLinks = [
+  { name: "CV", icon: <FileText className="w-4 h-4" />, href: "/Jithin_Raj_CV.pdf" },
+  { name: "GitHub", icon: <Github className="w-4 h-4" />, href: "https://github.com/jithinrajk97?tab=repositories" },
+  { name: "Linkedin", icon: <Linkedin className="w-4 h-4" />, href: "https://www.linkedin.com/in/jithin-raj-066855184/" },
+  { name: "Codepen", icon: <Code className="w-4 h-4" />, href: "#" }
+];
+
+export const Footer = memo(function Footer() {
   const buttonRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -120,34 +149,6 @@ export function Footer() {
     }
   }, []);
 
-  const contactInfo = [
-    {
-      type: "email",
-      value: "jithinraj.k97@gmail.com",
-      icon: <Mail className="w-4 h-4" />,
-      href: "mailto:jithinraj.k97@gmail.com"
-    },
-    {
-      type: "phone",
-      value: "+971 562590464",
-      icon: <Phone className="w-4 h-4" />,
-      href: "tel:+97156259046"
-    },
-    {
-      type: "phone",
-      value: "+91 9746067693",
-      icon: <Phone className="w-4 h-4" />,
-      href: "tel:+91974606769"
-    }
-  ];
-
-  const socialLinks = [
-    { name: "CV", icon: <FileText className="w-4 h-4" />, href: "/Jithin_Raj_CV.pdf" },
-    { name: "GitHub", icon: <Github className="w-4 h-4" />, href: "https://github.com/jithinrajk97?tab=repositories" },
-    { name: "Linkedin", icon: <Linkedin className="w-4 h-4" />, href: "https://www.linkedin.com/in/jithin-raj-066855184/" },
-    { name: "Codepen", icon: <Code className="w-4 h-4" />, href: "#" }
-  ];
-
   return (
     <section id="contact" className="bg-white text-black h-screen flex flex-col">
       <div className="container mx-auto px-4 flex-1 flex flex-col justify-between py-16">
@@ -229,4 +230,4 @@ export function Footer() {
       </div>
     </section>
   );
-}
+});

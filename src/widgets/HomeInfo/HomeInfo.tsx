@@ -4,13 +4,23 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronRight, ChevronsDown } from "lucide-react";
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { useRef } from "react";
+import { useRef, useCallback, memo } from "react";
 import "./HomeInfo.scss";
 import useHomeInfo from "./useHomeInfo";
 import Image from "next/image";
 
-export function HomeInfo() {
+export const HomeInfo = memo(function HomeInfo() {
   const { secondSection, width, card7 } = useHomeInfo();
+  
+  // Memoize download handler to prevent recreation
+  const handleDownloadCV = useCallback(() => {
+    const link = document.createElement('a');
+    link.href = '/JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
+    link.download = 'JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, []);
 
   return (
     <section
@@ -57,14 +67,7 @@ export function HomeInfo() {
               {/* View All Button */}
               <div className="mt-10 lg:mt-8 flex ">
                 <button 
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = '/JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
-                    link.download = 'JITHINRAJ -FRONTEND-DEVELOPER-RESUME.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
+                  onClick={handleDownloadCV}
                   className="group relative z-20 text-base  border border-white bg-transparent text-white px-6 py-2  font-medium hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
                 >
                   Download CV
@@ -103,4 +106,4 @@ export function HomeInfo() {
       </div>
     </section>
   );
-}
+});

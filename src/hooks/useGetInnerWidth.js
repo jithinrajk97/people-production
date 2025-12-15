@@ -1,7 +1,7 @@
 "use client"
 import { useSyncExternalStore } from "react";
 
-// Throttle function to limit resize events
+// Throttle function to limit resize events - moved outside to prevent recreation
 const throttle = (func, limit) => {
   let inThrottle;
   return function() {
@@ -15,10 +15,22 @@ const throttle = (func, limit) => {
   }
 }
 
+// Create a single throttled callback store to reuse across subscriptions
+const throttledCallbacks = new WeakMap();
+
 const subscribe = (callback) => {
-  const throttledCallback = throttle(callback, 100); // Throttle to 100ms
-  window.addEventListener("resize", throttledCallback);
-  return () => window.removeEventListener("resize", throttledCallback);
+  // Reuse throttled callback if it exists
+  let throttledCallback = throttledCallbacks.get(callback);
+  if (!throttledCallback) {
+    throttledCallback = throttle(callback, 100); // Throttle to 100ms
+    throttledCallbacks.set(callback, throttledCallback);
+  }
+  
+  window.addEventListener("resize", throttledCallback, { passive: true });
+  return () => {
+    window.removeEventListener("resize", throttledCallback);
+    throttledCallbacks.delete(callback);
+  };
 };
 
 const useGetInnerWidth = () => {
